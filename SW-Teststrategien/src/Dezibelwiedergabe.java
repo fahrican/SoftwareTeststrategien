@@ -14,6 +14,7 @@ public class Dezibelwiedergabe {
 	private JTextField textFieldDecibel;
 	private JTextField textFieldDays;
 	private JTextField textFieldEuro;
+	private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -94,7 +95,7 @@ public class Dezibelwiedergabe {
 				}
 			}
 		});
-		btnNewButton.setBounds(94, 125, 117, 29);
+		btnNewButton.setBounds(122, 131, 89, 29);
 		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblEuro = new JLabel("Euro:");
@@ -105,6 +106,18 @@ public class Dezibelwiedergabe {
 		textFieldEuro.setBounds(81, 223, 130, 26);
 		frame.getContentPane().add(textFieldEuro);
 		textFieldEuro.setColumns(10);
+		
+		btnNewButton_1 = new JButton("clear");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textFieldDays.setText("");
+				textFieldDecibel.setText("");
+				textFieldEuro.setText("");
+			}
+		});
+		btnNewButton_1.setBounds(6, 131, 89, 29);
+		frame.getContentPane().add(btnNewButton_1);
 	}
 	
 	private int checkForCorrectRange(int start, int end, int actualValue) {
@@ -115,10 +128,4 @@ public class Dezibelwiedergabe {
 		return -1;
 	}
 	
-	private void printNumberIsNotInRange(int actualValue) {
-		
-		if (actualValue == -1) {
-			JOptionPane.showMessageDialog(null, "Please enter a valid number", "Invalid number!", 0);
-		}
-	}
 }

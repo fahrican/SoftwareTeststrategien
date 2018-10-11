@@ -1,3 +1,3 @@
 # SoftwareTeststrategien
 
-<img hre="/SW-Teststrategien/src/ui.png" />
+<img href="/SW-Teststrategien/src/ui.png" />

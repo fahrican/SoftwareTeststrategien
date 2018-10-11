@@ -1,3 +1,3 @@
 # SoftwareTeststrategien
 
-<img src="SW-Teststrategien/src/ui.png" height="300" width="300" />
+<img src="SW-Teststrategien/src/ui.png" height="300" width="900" />

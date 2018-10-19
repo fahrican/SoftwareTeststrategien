@@ -2,6 +2,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import model.Range;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -71,19 +74,20 @@ public class Dezibelwiedergabe {
 			public void actionPerformed(ActionEvent ae) {
 				
 				int decibel, days, euro;
+				Range range = new Range();
 				try {
 					
 					decibel = Integer.parseInt(textFieldDecibel.getText());
-					if (checkForCorrectRange(10, 150, decibel) == -1) {
+					if (range.checkForCorrectRange(10, 150, decibel) == -1) {
 						JOptionPane.showMessageDialog(null, "Decibel must be between 10 and 150", "Invalid number!", 0);
 					}
 					
 					days = Integer.parseInt(textFieldDays.getText());
-					if (checkForCorrectRange(1, 31, days) == -1) {
+					if (range.checkForCorrectRange(1, 31, days) == -1) {
 						JOptionPane.showMessageDialog(null, "Day must be between 1 and 31", "Invalid number!", 0);
 					}
 
-					if (checkForCorrectRange(10, 150, decibel) != -1 && checkForCorrectRange(1, 31, days) != -1) {
+					if (range.checkForCorrectRange(10, 150, decibel) != -1 && range.checkForCorrectRange(1, 31, days) != -1) {
 					
 						euro = decibel * days;
 						textFieldEuro.setText(String.valueOf(euro));
@@ -120,12 +124,5 @@ public class Dezibelwiedergabe {
 		frame.getContentPane().add(btnNewButton_1);
 	}
 	
-	private int checkForCorrectRange(int start, int end, int actualValue) {
-		
-		if (actualValue >= start && actualValue <= end) {
-			return actualValue;
-		}
-		return -1;
-	}
 	
 }

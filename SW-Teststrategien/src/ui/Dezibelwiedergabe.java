@@ -1,3 +1,4 @@
+package ui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -33,6 +34,14 @@ public class Dezibelwiedergabe {
 				}
 			}
 		});
+	}
+	
+	public JTextField getTextFieldDecibel() {
+		return textFieldDecibel;
+	}
+
+	public void setTextFieldDecibel(JTextField textFieldDecibel) {
+		this.textFieldDecibel = textFieldDecibel;
 	}
 
 	/**

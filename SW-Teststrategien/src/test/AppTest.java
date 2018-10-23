@@ -33,7 +33,7 @@ public class AppTest
 		Dezibelwiedergabe dw = new Dezibelwiedergabe();
 		//act
 		JTextField tf = dw.getTextFieldDecibel();
-		String input = tf.getText();
+		//String input = tf.getText();
 		//assert
 		assertNotNull(tf);
 	}
@@ -50,6 +50,15 @@ public class AppTest
 		//fail("Exception expected");
 	}
 	
+	public boolean isNumeric(String s) {
+		try {
+			Integer.parseInt(s);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 	@Test
 	public void testTextFieldDecibelIsNumeric() {
 		//assign
@@ -60,6 +69,17 @@ public class AppTest
 		String input = tf.getText();
 		//assert
 		assertTrue(isNumeric(input));
+	}
+	
+	@Test
+	public void testTextFieldDaysIsNumeric() {
+		//assign
+		Dezibelwiedergabe dw = new Dezibelwiedergabe();
+		//act
+		dw.setTextFieldDays(new JTextField("10"));
+		JTextField days = dw.getTextFieldDays();
+		//assert
+		assertTrue(isNumeric(days.getText()));
 	}
 	
 	@Test
@@ -78,37 +98,44 @@ public class AppTest
 		assertEquals(-1, actualValue);
 	}
 	
+	@Test(expected = Exception.class)
+	public void testTextFieldDecibelSmallerThanTen() throws Exception  {
+		
+		Range range = new Range();
+		range.checkCorrectRangeForDecibel(10, 150, 9);
+	}
+	
+	@Test(expected = Exception.class)
+	public void testTextFieldDecibelGreater150() throws Exception  {
+		
+		Range range = new Range();
+		range.checkCorrectRangeForDecibel(10, 150, 151);
+	}
+	
+	@Rule public ExpectedException thrown = ExpectedException.none();
+	
 	@Test
-	public void testLimitArea1() {
-		Dezibelwiedergabe dw = new Dezibelwiedergabe();
-		dw.setTextFieldDecibel(new JTextField("10"));
-		String input = dw.getTextFieldDecibel().getText();
-	    assertThat(Integer.parseInt(input), allOf(greaterThan(9), lessThan(21)));
+	public void testTextFieldDecibelStartSmallerTen() throws Exception  {
+		
+		Range range = new Range();
+		
+		thrown.expect(Exception.class);
+		thrown.expectMessage("Start must be at least 10 decibel");
+		
+		range.checkCorrectRangeForDecibel(9, 150, 80);
+		//fail("Exception expected");
 	}
 	
 	@Test
-	public void testAC2() {
-		Dezibelwiedergabe dw = new Dezibelwiedergabe();
-		JTextField tf = dw.getTextFieldDecibel();
-		String input = tf.getText();
-	    assertThat(Integer.parseInt(input), allOf(greaterThan(19), lessThan(31)));
-	}
-	
-	@Test
-	public void testAC3() {
-		Dezibelwiedergabe dw = new Dezibelwiedergabe();
-		JTextField tf = dw.getTextFieldDecibel();
-		String input = tf.getText();
-	    assertThat(Integer.parseInt(input), allOf(greaterThan(29), lessThan(41)));
-	}
-	
-	public boolean isNumeric(String s) {
-		try {
-			Integer.parseInt(s);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+	public void testTextFieldDecibelEndGreater150() throws Exception  {
+		
+		Range range = new Range();
+		
+		thrown.expect(Exception.class);
+		thrown.expectMessage("End can't greater than 150 decibel");
+		
+		range.checkCorrectRangeForDecibel(10, 160, 80);
+		//fail("Exception expected");
 	}
 	
 }

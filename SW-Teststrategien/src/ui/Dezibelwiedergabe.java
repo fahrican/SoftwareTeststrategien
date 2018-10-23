@@ -20,6 +20,22 @@ public class Dezibelwiedergabe {
 	private JTextField textFieldEuro;
 	private JButton btnNewButton_1;
 
+	public JTextField getTextFieldDecibel() {
+		return textFieldDecibel;
+	}
+
+	public void setTextFieldDecibel(JTextField textFieldDecibel) {
+		this.textFieldDecibel = textFieldDecibel;
+	}
+
+	public JTextField getTextFieldDays() {
+		return textFieldDays;
+	}
+
+	public void setTextFieldDays(JTextField textFieldDays) {
+		this.textFieldDays = textFieldDays;
+	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -36,14 +52,6 @@ public class Dezibelwiedergabe {
 		});
 	}
 	
-	public JTextField getTextFieldDecibel() {
-		return textFieldDecibel;
-	}
-
-	public void setTextFieldDecibel(JTextField textFieldDecibel) {
-		this.textFieldDecibel = textFieldDecibel;
-	}
-
 	/**
 	 * Create the application.
 	 */

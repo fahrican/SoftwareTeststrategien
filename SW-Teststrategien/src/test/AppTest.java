@@ -3,6 +3,13 @@ package test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import model.Range;
 
 import javax.swing.JTextField;
 
@@ -31,8 +38,20 @@ public class AppTest
 		assertNotNull(tf);
 	}
 	
+
+	@Test(expected = Exception.class)
+	public void testTextFieldDecibelAsString() throws Exception {
+		//assign
+		Dezibelwiedergabe dw = new Dezibelwiedergabe();
+		dw.setTextFieldDecibel(new JTextField("test"));
+		String val = dw.getTextFieldDecibel().getText();
+		
+		int myInt = Integer.parseInt(val);
+		//fail("Exception expected");
+	}
+	
 	@Test
-	public void isNumeric() {
+	public void testTextFieldDecibelIsNumeric() {
 		//assign
 		Dezibelwiedergabe dw = new Dezibelwiedergabe();
 		//act
@@ -44,11 +63,26 @@ public class AppTest
 	}
 	
 	@Test
-	public void testAC1() {
+	public void testRangeValueSmallerThanStart() {
+		
+		Range range = new Range();
+		int actualValue = range.checkForCorrectRange(10, 150, 9);
+		assertEquals(-1, actualValue);
+	}
+	
+	@Test
+	public void testRangeValueGreaterThanEnd() {
+		
+		Range range = new Range();
+		int actualValue = range.checkForCorrectRange(10, 150, 151);
+		assertEquals(-1, actualValue);
+	}
+	
+	@Test
+	public void testLimitArea1() {
 		Dezibelwiedergabe dw = new Dezibelwiedergabe();
 		dw.setTextFieldDecibel(new JTextField("10"));
-		JTextField tf = dw.getTextFieldDecibel();
-		String input = tf.getText();
+		String input = dw.getTextFieldDecibel().getText();
 	    assertThat(Integer.parseInt(input), allOf(greaterThan(9), lessThan(21)));
 	}
 	
